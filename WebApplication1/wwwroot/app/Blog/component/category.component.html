@@ -1,0 +1,57 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="sidenav">
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <span class="visible-xs navbar-brand">Sidebar menu</span>
+                    </div>
+                    <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a [routerLink]="['/Home/Admin']">Manage Categories</a></li>
+                            <li><a [routerLink]="['/Home/Admin/tag']">Manage Tags</a></li>
+                            <li><a [routerLink]="['/Home/Admin/managePost']">Manage Posts</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+            <form #catForm="ngForm">
+                <h2>Category List</h2>
+                <br />
+                <button (click)="add()" name="add" value="add" class="btn btn-primary">Add New</button>
+                <br /><br />
+                <div *ngIf="addCat">
+                    <input type="text" #catName="ngModel" name="name" placeholder="Enter New Category" value="name" [(ngModel)]="newCat.name" />
+                    <button (click)="addCategory(newCat)" name="add" value="add" class="btn btn-primary">Add</button>
+                </div>
+                <br /><br />
+                <div *ngIf="edit">
+                    <input type="text" #catName="ngModel" name="name" value="name" [(ngModel)]="category.name" />
+                    <button (click)="updateCategory(category)" name="update" value="update" class="btn btn-primary">Update</button>
+                </div>
+                <br /><br />
+            </form>
+            <table class="table striped">
+                <tr>
+                    <th align="center">Category Id</th>
+                    <th align="center">Category Name</th>
+                    <th align="center">Operations</th>
+                    <th colspan="2"></th>
+                </tr>
+                <tr *ngFor="let cat of catList">
+                    <td>{{cat.id}}</td>
+                    <td>{{cat.name}}</td>
+                    <td><button (click)="getCatById(cat)" name="edit" value="edit" class="btn btn-primary">Edit</button></td>
+                    <td><button (click)="deleteCategory(cat)" name="delete" value="delete" class="btn btn-primary">Delete</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>

@@ -1,0 +1,46 @@
+﻿
+
+
+<div class="container">
+    <div class="blogContainer">
+        <div class="mainblogview">
+
+            <form class="form-inline">
+                <div class="form-group">
+
+                    <!--<input type="text" [(ngModel)]="term" class="form-control" placeholder="Search">-->
+                </div>
+            </form>
+            <!--<div>
+                <form>
+                    <input [(ngModel)]="term" placeholder="Search By Title" [ngModelOptions]="{standalone: true}" />
+                </form>
+            </div>-->
+            <div style="overflow:hidden;width:80%;">
+                <div class="postDescContainer">
+                    <div class="postDescTitle">
+
+                        <h2> {{posts.title}} </h2>
+
+                    </div>
+
+                    <div class="postDescCategory">
+                        Posted By: <b>{{posts.userName}}</b> in <b>{{posts.categoryName}}</b> on <b>{{posts.postedOn | date: 'fullDate'}}</b>
+                    </div>
+
+                    <div class="postDescBody">
+                        {{posts.content}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+      
+
+    </div>
+</div>
+
+
+<!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->

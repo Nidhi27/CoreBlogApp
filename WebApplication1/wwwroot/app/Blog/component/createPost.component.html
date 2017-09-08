@@ -1,0 +1,40 @@
+﻿<div class="container">
+    <div class="row">
+      
+
+        <form #catForm="ngForm">
+            <h2>Add Post</h2>
+            <br />
+          
+            <div>
+               
+                    <input type="text" #catName="ngModel" name="name" placeholder="Enter New Post" value="name" [(ngModel)]="newPost.title" [ngModelOptions]="{standalone: true}" />
+               
+
+              <br /> <br />
+                    <textarea #catContent="ngModel" placeholder="Write Something" [(ngModel)]="newPost.content" [ngModelOptions]="{standalone: true}" style="width:400px;height:100px"></textarea>
+                    <br/><br/>
+    <select [(ngModel)]="newPost.category_Id" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let cat of catList" value="{{cat.id}}">{{cat.name}}</option>
+    </select>
+    <br /><br />
+    <select multiple [(ngModel)]="newPost.tagIds" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let tag of tagList" value="{{tag.id}}">{{tag.name}}</option>
+    </select>
+    <!--<select multiple [(ngModel)]="tags" formControlName="Tags">
+        <option *ngFor="let c of tagList"
+                [ngValue]="c"
+                [selected]="c"
+                (Change)="onChange()">
+            {{c.name}}
+        </option>
+    </select>-->
+    <br /><br />
+    <button (click)="addPosts(newPost)" name="add" value="add" class="btn btn-primary">Add</button>
+</div>
+           
+            </form>
+
+
+    </div>
+</div>

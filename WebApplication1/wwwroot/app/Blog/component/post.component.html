@@ -1,0 +1,74 @@
+﻿
+
+
+<div class="container">
+    <div class="blogContainer">
+        <div class="mainblogview">
+
+            <form class="form-inline">
+                <div class="form-group">
+
+                    <!--<input type="text" [(ngModel)]="term" class="form-control" placeholder="Search">-->
+                </div>
+            </form>
+            <div>
+                <form>
+                  
+                    <input [(ngModel)]="term" placeholder="Search By Title" [ngModelOptions]="{standalone: true}" />
+                </form>
+            </div>
+            <div style="overflow:hidden;width:80%;">
+                <div *ngFor="let p of posts|filter:term|paginate: { itemsPerPage: 5, currentPage: p }" class="postDescContainer">
+                    <div class="postDescTitle">
+
+                        <h2><a [routerLink]="['/post-details', p.id]"> {{p.title}} </a></h2>
+
+                    </div>
+
+                    <div class="postDescCategory">
+                        Posted By: <b>{{p.userName}}</b> in <b>{{p.categoryName}}</b> on <b>{{p.postedOn | date: 'fullDate'}}</b>
+                    </div>
+
+                    <div class="postDescBody">
+                        {{p.content | slice: '0': '300'}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mainCatTagView">
+            <div class="postCategoryContainer">
+                <div class="addCatCont" style="align-content:center">
+                    Categories:
+                    <div>
+                        <ul *ngFor="let p of cats">
+                            <!--<li><a ng-click="filterByCategory(cats.Id)"> {{cats.Name}}</a> </li-->
+                            <!--<li> <a href="#!/category/{{cats.Id}}">{{cats.Name}}</a></li>-->
+                            <li><a [routerLink]="['/category', p.id]"> {{p.name}} </a> </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="postCategoryContainer">
+                <div style="align-content:center">
+                    Tags:
+                    <div>
+                        <ul *ngFor="let p of tags">
+                            <!-- <li><a ng-click="filterByTag(tags.Id)"> {{tags.Name}}</a></li>-->
+                            <!--<li><a href="#!/tag/{{tags.Id}}">{{tags.Name}}</a></li>-->
+                            <li><a [routerLink]="['/tag', p.id]"> {{p.name}} </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

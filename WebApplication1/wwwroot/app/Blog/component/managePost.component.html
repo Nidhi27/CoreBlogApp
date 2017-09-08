@@ -1,0 +1,82 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="sidenav">
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <span class="visible-xs navbar-brand">Sidebar menu</span>
+                    </div>
+                    <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a [routerLink]="['/Home/Admin']">Manage Categories</a></li>
+                            <li><a [routerLink]="['/Home/Admin/tag']">Manage Tags</a></li>
+                            <li class="active"><a [routerLink]="['/Home/Admin/managePost']">Manage Posts</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <form #catForm="ngForm">
+         
+            <br />
+          
+            <div *ngIf="edit" style="float:right">
+             <label>Title: </label> <br/>  <input type="text" #catName="ngModel" name="name" value="name" [(ngModel)]="post.title" [ngModelOptions]="{standalone: true}" />
+                <br/><br/>
+              <label>Content: </label> <br/>  <textarea #catContent ="ngModel" name="content" value="content" [(ngModel)]="post.content" [ngModelOptions]="{standalone: true}"></textarea>
+                <br/><br/>
+               <label>Category: </label> <br/> 
+                <!--<select  placeholder="Select Category" [(ngModel)]="post.category_Id" [ngModelOptions]="{standalone: true}">
+                <option selected>Select category</option>
+                    <option *ngFor="let cat of catList" [value]="cat.id" [selected]="cat" required>{{cat.name}}</option>
+                </select>-->
+                
+                <select #cat="ngModel" name="cat" [(ngModel)]="post.category_Id" [ngModelOptions]="{standalone: true}">
+                    <option selected *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+                </select>
+
+                <!--<select #cat="ngModel" value="cat" [(ngModel)]="post.category_Id" [ngModelOptions]="{standalone: true}">
+                    <option selected [value]="cats.id" disabled>{{post.categoryName}}</option>
+                    <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+                </select>-->
+
+                <!--<select #select [(ngModel)]="post.category_Id" [ngModelOptions]="{standalone: true}" (change)="logDropdown(select.value)">
+                    <option *ngFor="let item of catList" [value]="item.id">{{item.name}}</option>
+                </select>-->
+                <br /><br/>
+               <label>Tags: </label> <br/><select multiple #tag="ngModel" name="tag" [(ngModel)]="post.tagIds" [ngModelOptions]="{standalone: true}">
+                <option selected multiple *ngFor="let tag of tagList" [value]="tag.id">{{tag.name}}</option>
+                </select>
+                <br/><br/>
+                <button (click)="updatePost(post)" name="update" value="update" class="btn btn-primary">Update</button>
+                <br/><br/>
+            </div>
+            <br /><br />
+        </form>
+        <table class="table striped">
+            <tr>
+                <th align="center">Post Id</th>
+                <th align="center">Post Title</th>
+                <th align="center">Operations</th>
+                <th colspan="2"></th>
+            </tr>
+            <tr *ngFor="let cat of postList">
+                <td>{{cat.id}}</td>
+                <td>{{cat.title}}</td>
+                <td><button (click)="getPostById(cat)" name="edit" value="edit" class="btn btn-primary">Edit</button></td>
+                <td><button (click)="deletePost(cat)" name="delete" value="delete" class="btn btn-primary">Delete</button></td>
+            </tr>
+        </table>
+
+
+
+    </div>
+</div>
